@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Week · IT Quiz</title>
+<style>
+:root{--bg:#f2f4ff;--card:#ffffff;--tx:#0b1030;--mut:#5a628c;--ac:#6d28d9;--ac2:#0891b2;--ac3:#db2777;--ok:#059669;--no:#e11d48;--bd:#d6dbf5;--grid:rgba(109,40,217,.07);--glow:0 4px 18px rgba(109,40,217,.15);--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#060816;--card:#0d1233;--tx:#e8ecff;--mut:#8c95c7;--ac:#a78bfa;--ac2:#22d3ee;--ac3:#f472b6;--ok:#10b981;--no:#fb3b64;--bd:#232a5c;--grid:rgba(34,211,238,.07);--glow:0 0 22px rgba(34,211,238,.25);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#060816;--card:#0d1233;--tx:#e8ecff;--mut:#8c95c7;--ac:#a78bfa;--ac2:#22d3ee;--ac3:#f472b6;--ok:#10b981;--no:#fb3b64;--bd:#232a5c;--grid:rgba(34,211,238,.07);--glow:0 0 22px rgba(34,211,238,.25);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at 15% -10%,rgba(167,139,250,.28),transparent 45%),radial-gradient(circle at 100% 10%,rgba(34,211,238,.2),transparent 40%),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:auto,auto,34px 34px,34px 34px;background-attachment:fixed;color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45;min-height:100vh}
+.wrap{max-width:640px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--mono);font-weight:800;font-size:15px;letter-spacing:.14em;cursor:pointer}
+.logo b{color:var(--ac2);text-shadow:0 0 12px var(--ac2)}
+.lang button{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:6px 12px;cursor:pointer;font:600 13px var(--mono)}
+.lang button:first-child{border-radius:8px 0 0 8px}.lang button:last-child{border-radius:0 8px 8px 0}
+.lang button.on{background:var(--ac2);color:#001018;border-color:var(--ac2);box-shadow:var(--glow)}
+.eb{display:inline-block;margin-top:26px;padding:4px 10px;border:1px solid var(--ac2);border-radius:6px;color:var(--ac2);font:700 12px var(--mono);letter-spacing:.2em}
+h1{font-family:var(--mono);font-size:clamp(34px,10vw,54px);margin:12px 0 6px;line-height:1.05;letter-spacing:-.02em;background:linear-gradient(90deg,var(--ac2),var(--ac),var(--ac3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);margin:0 0 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cat{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;cursor:pointer;text-align:left;color:var(--tx);font:inherit;transition:.2s;overflow:hidden}
+.cat::after{content:"";position:absolute;right:0;top:0;width:34px;height:34px;border-top:2px solid var(--ac2);border-right:2px solid var(--ac2);border-top-right-radius:14px;opacity:.7}
+.cat:hover,.cat:active{border-color:var(--ac2);box-shadow:var(--glow);transform:translateY(-2px)}
+.cat .e{font-size:30px}.cat b{display:block;margin-top:6px;font-family:var(--mono)}.cat small{color:var(--mut)}
+.cat.wide{grid-column:1/-1;background:linear-gradient(120deg,#5b21b6,#0e7490 60%,#be185d);color:#fff;border:0;box-shadow:var(--glow)}.cat.wide small{color:#ffffffcc}.cat.wide::after{display:none}
+.top{display:flex;justify-content:space-between;font:700 14px var(--mono);margin:16px 0 8px;color:var(--ac2)}
+.bar{height:6px;background:var(--bd);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.bar i{display:block;height:100%;background:var(--ac);transition:width .3s}
+.bar.t i{background:linear-gradient(90deg,var(--ac2),var(--ac3));box-shadow:0 0 10px var(--ac2);transition:width .1s linear}.bar.t.low i{background:var(--no);box-shadow:0 0 10px var(--no)}
+.q{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;margin-top:12px;box-shadow:var(--glow)}
+.q h2{font-size:20px;margin:0 0 12px}
+.q h2::before{content:"> ";color:var(--ac2);font-family:var(--mono)}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin:9px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--bd);background:transparent;color:var(--tx);font:inherit;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--ac2);box-shadow:var(--glow)}
+.opt .k{flex:none;width:26px;height:26px;border-radius:7px;background:var(--bd);display:grid;place-items:center;font:700 13px var(--mono);color:var(--ac2)}
+.opt.ok{background:var(--ok);border-color:var(--ok);color:#fff}.opt.no{background:var(--no);border-color:var(--no);color:#fff}
+.opt.ok .k,.opt.no .k{background:#ffffff33;color:#fff}
+.btn{display:block;width:100%;margin-top:12px;padding:13px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;font:700 15px var(--mono);cursor:pointer;box-shadow:var(--glow)}
+.btn.g{background:transparent;color:var(--tx);border:1px solid var(--bd);box-shadow:none}
+.big{font:800 62px var(--mono);text-align:center;margin:6px 0;background:linear-gradient(90deg,var(--ac2),var(--ac3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.c{text-align:center}.mut{color:var(--mut);font-family:var(--mono)}
+.rv{border-left:3px solid var(--no);background:var(--card);padding:10px 12px;border-radius:8px;margin:8px 0;font-size:14px}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.035)}100%{transform:scale(1)}}
+#app>*{animation:in .4s ease both}
+#fb>*{animation:in .3s ease both}
+.cat{animation:in .45s ease both}
+.cat:nth-child(2){animation-delay:.06s}.cat:nth-child(3){animation-delay:.12s}.cat:nth-child(4){animation-delay:.18s}.cat:nth-child(5){animation-delay:.24s}
+.opt{animation:in .4s ease both}
+.opt:nth-child(1){animation-delay:.05s}.opt:nth-child(2){animation-delay:.12s}.opt:nth-child(3){animation-delay:.19s}.opt:nth-child(4){animation-delay:.26s}
+.opt.no{animation:shake .4s ease}
+.opt.ok{animation:pop .35s ease}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo" id="lg">DIGITAL<b>WEEK</b></div><div class="lang"><button id="bk">ҚАЗ</button><button id="br">РУС</button></div></header>
+<main id="app"></main>
+</div>
+<script>
+var L='kk',best={};
+try{L=localStorage.getItem('l')||'kk';best=JSON.parse(localStorage.getItem('b')||'{}')}catch(e){}
+var T={
+kk:{sub:'IT білімің қандай? Тақырыпты таңда да, 20 секунд ішінде жауап бер.',best:'Рекорд',q:'сұрақ',pts:'ұпай',next:'Келесі →',fin:'Нәтижесін көру',ok:'Дұрыс жауап',tm:'Уақыт бітті!',res:'Нәтиже',cor:'дұрыс',ex:'Сарапшы 🏆',mid:'Тәжірибелі 👍',nb:'Жаңадан бастаушы 🌱',rec:'Жаңа рекорд! 🎉',err:'Қателермен жұмыс',again:'Қайта ойнау',home:'Басты бет',perf:'Барлығы дұрыс! 🔥'},
+ru:{sub:'Насколько ты разбираешься в IT? Выбери тему и отвечай за 20 секунд.',best:'Рекорд',q:'вопросов',pts:'очков',next:'Дальше →',fin:'Посмотреть результат',ok:'Правильный ответ',tm:'Время вышло!',res:'Результат',cor:'верно',ex:'Эксперт 🏆',mid:'Опытный 👍',nb:'Новичок 🌱',rec:'Новый рекорд! 🎉',err:'Работа над ошибками',again:'Играть снова',home:'На главную',perf:'Всё верно! 🔥'}
+};
+var C=[
+{kk:'Негіздер',ru:'Основы',e:'🖥'},
+{kk:'Python',ru:'Python',e:'🐍'},
+{kk:'Веб',ru:'Веб',e:'🌐'},
+{kk:'Желі және қауіпсіздік',ru:'Сети и безопасность',e:'🔒'},
+{kk:'Аралас',ru:'Микс',e:'🎲'}
+];
+var Q=[
+{c:0,t:{kk:'«HTML» қысқартуы нені білдіреді?',ru:'Что означает HTML?'},o:['HyperText Markup Language','High Text Machine Language','Home Tool Markup Language','Hyper Transfer Mode Language'],a:0},
+{c:0,t:{kk:'Бір байтта неше бит бар?',ru:'Сколько бит в одном байте?'},o:['4','8','16','10'],a:1},
+{c:0,t:{kk:'CPU дегеніміз не?',ru:'Что такое CPU?'},o:{kk:['Процессор','Жедел жады','Қатты диск','Бейнекарта'],ru:['Процессор','Оперативная память','Жёсткий диск','Видеокарта']},a:0},
+{c:0,t:{kk:'Екілік 101 санының ондық жүйедегі мәні қандай?',ru:'Чему равно двоичное 101 в десятичной системе?'},o:['3','5','6','7'],a:1},
+{c:0,t:{kk:'Төмендегілердің қайсысы операциялық жүйе?',ru:'Что из этого операционная система?'},o:['Linux','Python','Chrome','Excel'],a:0},
+{c:1,t:{kk:'Python-да мәтінді экранға қалай шығарады?',ru:'Как вывести текст на экран в Python?'},o:['print("Hi")','echo "Hi"','console.log("Hi")','printf("Hi")'],a:0},
+{c:1,t:{kk:'3.14 мәні қай типке жатады?',ru:'Какой тип у значения 3.14?'},o:['int','float','str','bool'],a:1},
+{c:1,t:{kk:'len("code") нәтижесі қандай?',ru:'Что вернёт len("code")?'},o:['3','4','5','Error'],a:1},
+{c:1,t:{kk:'Қай жолда тізім (list) жасалады?',ru:'Какая строка создаёт список (list)?'},o:['x = [1, 2, 3]','x = (1, 2, 3)','x = {1, 2, 3}','x = <1, 2, 3>'],a:0},
+{c:1,t:{kk:'list(range(3)) нәтижесі қандай?',ru:'Что даст list(range(3))?'},o:['[0, 1, 2]','[1, 2, 3]','[0, 1, 2, 3]','[1, 2]'],a:0},
+{c:2,t:{kk:'Беттің сыртқы көрінісін (стильді) қай тіл басқарады?',ru:'Какой язык отвечает за внешний вид (стиль) страницы?'},o:['HTML','CSS','SQL','C'],a:1},
+{c:2,t:{kk:'Сілтеме жасайтын HTML тегі қайсы?',ru:'Какой HTML-тег создаёт ссылку?'},o:['<a>','<p>','<img>','<div>'],a:0},
+{c:2,t:{kk:'HTTP қысқартуы нені білдіреді?',ru:'Что означает HTTP?'},o:['HyperText Transfer Protocol','High Transfer Text Program','Home Text Tool Protocol','Hyper Tool Type Process'],a:0},
+{c:2,t:{kk:'CSS-те id бойынша таңдау үшін қай таңба қолданылады?',ru:'Какой символ используется в CSS для выбора по id?'},o:['#','.','@','&'],a:0},
+{c:2,t:{kk:'Ең үлкен тақырып тегі қайсы?',ru:'Какой тег задаёт самый крупный заголовок?'},o:['<h1>','<h6>','<head>','<title>'],a:0},
+{c:3,t:{kk:'IP-мекенжай дегеніміз не?',ru:'Что такое IP-адрес?'},o:{kk:['Желідегі құрылғының мекенжайы','Сайттың атауы','Вирус түрі','Wi-Fi құпиясөзі'],ru:['Адрес устройства в сети','Название сайта','Тип вируса','Пароль Wi-Fi']},a:0},
+{c:3,t:{kk:'Қай құпиясөз ең сенімді?',ru:'Какой пароль самый надёжный?'},o:['123456','qwerty','password','T7#kP9!mQ2vL'],a:3},
+{c:3,t:{kk:'Фишинг дегеніміз не?',ru:'Что такое фишинг?'},o:{kk:['Жалған сайттар мен хаттар арқылы алаяқтық','Интернетті жылдамдату','Антивирус түрі','Файлдарды сығу'],ru:['Мошенничество с поддельными сайтами и письмами','Ускорение интернета','Вид антивируса','Сжатие файлов']},a:0},
+{c:3,t:{kk:'Мекенжайдағы https нені білдіреді?',ru:'Что означает https в адресе?'},o:{kk:['Байланыс шифрланған','Сайт тегін','Сайт тек балаларға','Сайтта жарнама жоқ'],ru:['Соединение зашифровано','Сайт бесплатный','Сайт только для детей','На сайте нет рекламы']},a:0},
+{c:3,t:{kk:'DNS не істейді?',ru:'Что делает DNS?'},o:{kk:['Домен атауын IP-мекенжайға айналдырады','Серверді салқындатады','Құпиясөздерді сақтайды','Сайттарды сызады'],ru:['Переводит доменные имена в IP-адреса','Охлаждает сервер','Хранит пароли','Рисует сайты']},a:0},
+{c:0,t:{kk:'RAM дегеніміз не?',ru:'Что такое RAM?'},o:{kk:['Жедел жады','Процессор','Қатты диск','Желі картасы'],ru:['Оперативная память','Процессор','Жёсткий диск','Сетевая карта']},a:0},
+{c:0,t:{kk:'2 санының 10-дәрежесі неге тең?',ru:'Чему равно 2 в степени 10?'},o:['512','1000','1024','2048'],a:2},
+{c:0,t:{kk:'Алгоритм дегеніміз не?',ru:'Что такое алгоритм?'},o:{kk:['Есепті шешудің нақты қадамдар тізбегі','Бағдарламалау тілінің атауы','Компьютер бөлшегі','Файл түрі'],ru:['Чёткая последовательность шагов для решения задачи','Название языка программирования','Деталь компьютера','Тип файла']},a:0},
+{c:0,t:{kk:'Python файлының кеңейтілімі қандай?',ru:'Какое расширение у файла Python?'},o:['.py','.js','.cpp','.html'],a:0},
+{c:0,t:{kk:'Git дегеніміз не?',ru:'Что такое Git?'},o:{kk:['Нұсқаларды басқару жүйесі','Мәтін редакторы','Браузер','Бағдарламалау тілі'],ru:['Система контроля версий','Текстовый редактор','Браузер','Язык программирования']},a:0},
+{c:1,t:{kk:'Python-да түсініктемені (комментарий) қалай жазады?',ru:'Как написать комментарий в Python?'},o:['# comment','// comment','-- comment','/* comment */'],a:0},
+{c:1,t:{kk:'7 // 2 нәтижесі қандай?',ru:'Что вернёт 7 // 2?'},o:['3','3.5','4','2'],a:0},
+{c:1,t:{kk:'Функция жасайтын кілт сөз қайсы?',ru:'Какое ключевое слово создаёт функцию?'},o:['def','func','function','fn'],a:0},
+{c:1,t:{kk:'"ab" * 3 нәтижесі қандай?',ru:'Что вернёт "ab" * 3?'},o:['ababab','ab3','aaabbb','Error'],a:0},
+{c:1,t:{kk:'Пайдаланушыдан мәлімет қалай алады?',ru:'Как получить ввод от пользователя?'},o:['input()','read()','scan()','get()'],a:0},
+{c:2,t:{kk:'Сурет қоятын HTML тегі қайсы?',ru:'Какой тег вставляет изображение?'},o:['<img>','<pic>','<image>','<src>'],a:0},
+{c:2,t:{kk:'CSS-те мәтін түсін қай қасиет береді?',ru:'Какое свойство CSS задаёт цвет текста?'},o:['color','text-color','font-color','foreground'],a:0},
+{c:2,t:{kk:'Responsive дизайн дегеніміз не?',ru:'Что такое responsive-дизайн?'},o:{kk:['Сайтты әртүрлі экрандарға бейімдеу','Өте жылдам жүктеу','Тек компьютерге арналған дизайн','Мәтінсіз сайт'],ru:['Адаптация сайта под разные экраны','Очень быстрая загрузка','Дизайн только для ПК','Сайт без текста']},a:0},
+{c:2,t:{kk:'JavaScript-те тұрақтыны қалай жариялайды?',ru:'Как объявить константу в JavaScript?'},o:['const x = 5','static x = 5','final x = 5','def x = 5'],a:0},
+{c:2,t:{kk:'Нөмірленген тізімді қай тег жасайды?',ru:'Какой тег создаёт нумерованный список?'},o:['<ol>','<ul>','<dl>','<nl>'],a:0},
+{c:3,t:{kk:'VPN дегеніміз не?',ru:'Что такое VPN?'},o:{kk:['Қорғалған шифрланған арна','Вирус түрі','Бұлтты қойма','Іздеу жүйесі'],ru:['Защищённый зашифрованный канал','Вид вируса','Облачное хранилище','Поисковая система']},a:0},
+{c:3,t:{kk:'Екі факторлы аутентификация дегеніміз не?',ru:'Что такое двухфакторная аутентификация?'},o:{kk:['Құпиясөз бен қосымша растау (мысалы, код) арқылы кіру','Қатарынан екі құпиясөз','Екі саусақпен кіру','Екі аккаунт'],ru:['Вход с паролем и дополнительным подтверждением (например, кодом)','Два пароля подряд','Вход двумя пальцами','Два аккаунта']},a:0},
+{c:3,t:{kk:'HTTPS-тің әдепкі порты қандай?',ru:'Какой порт по умолчанию у HTTPS?'},o:['443','80','21','25'],a:0},
+{c:3,t:{kk:'Шифрлаушы вирус (ransomware) не істейді?',ru:'Что делает вирус-шифровальщик (ransomware)?'},o:{kk:['Файлдарды құлыптап, төлем талап етеді','Компьютерді жылдамдатады','Тізілімді тазалайды','Жарнаманы жояды'],ru:['Блокирует файлы и требует выкуп','Ускоряет компьютер','Чистит реестр','Удаляет рекламу']},a:0},
+{c:3,t:{kk:'Брандмауэр (firewall) не істейді?',ru:'Что делает брандмауэр (firewall)?'},o:{kk:['Желі трафигін ережелер бойынша сүзеді','Процессорды салқындатады','Суреттерді сақтайды','Құжаттарды басып шығарады'],ru:['Фильтрует сетевой трафик по правилам','Охлаждает процессор','Хранит фото','Печатает документы']},a:0}
+];
+var $=function(i){return document.getElementById(i)};
+var scr='home',cat=0,qs=[],i=0,score=0,streak=0,okc=0,left=20,tm=null,ord=[],ans=false,wrong=[],isRec=false;
+function sh(a){a=a.slice();for(var k=a.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1)),x=a[k];a[k]=a[j];a[j]=x}return a}
+function opts(q){return Array.isArray(q.o)?q.o:q.o[L]}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function home(){
+clearInterval(tm);scr='home';var t=T[L],h='<div class="eb">// DIGITAL WEEK</div><h1>IT Quiz</h1><p class="sub">'+t.sub+'</p><div class="grid">';
+C.forEach(function(c,k){var n=k==4?10:Q.filter(function(q){return q.c==k}).length,b=best[k];
+h+='<button class="cat'+(k==4?' wide':'')+'" data-k="'+k+'"><div class="e">'+c.e+'</div><b>'+c[L]+'</b><small>'+n+' '+t.q+(b?' · '+t.best+': '+b:'')+'</small></button>'});
+$('app').innerHTML=h+'</div>';
+document.querySelectorAll('.cat').forEach(function(b){b.onclick=function(){start(+b.dataset.k)}})}
+function start(k){ques.last=-1;cat=k;qs=k==4?sh(Q).slice(0,10):sh(Q.filter(function(q){return q.c==k}));i=0;score=0;streak=0;okc=0;wrong=[];ques()}
+function ques(){
+scr='q';ans=false;left=20;var q=qs[i],o=opts(q);
+if(!ord.length||ord.length!=o.length||ques.last!=i){ord=sh(o.map(function(_,k){return k}));ques.last=i}
+paint();clearInterval(tm);
+tm=setInterval(function(){left-=.1;var b=$('tb');if(b){b.style.width=Math.max(0,left/20*100)+'%';b.parentNode.className='bar t'+(left<6?' low':'')}
+if(left<=0){clearInterval(tm);pick(-1)}},100)}
+function paint(){
+var t=T[L],q=qs[i],o=opts(q),h='<div class="top"><span>'+(i+1)+' / '+qs.length+'</span><span>'+(streak>1?'🔥'+streak+' · ':'')+score+' '+t.pts+'</span></div>';
+h+='<div class="bar"><i style="width:'+(i/qs.length*100)+'%"></i></div><div class="bar t"><i id="tb" style="width:'+(left/20*100)+'%"></i></div>';
+h+='<div class="q"><h2>'+esc(q.t[L])+'</h2><div id="os">';
+ord.forEach(function(k,n){h+='<button class="opt" data-k="'+k+'"><span class="k">'+'ABCD'.charAt(n)+'</span><span>'+esc(o[k])+'</span></button>'});
+$('app').innerHTML=h+'</div><div id="fb"></div></div>';
+document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){pick(+b.dataset.k)}})}
+function pick(k){
+if(ans)return;ans=true;clearInterval(tm);var t=T[L],q=qs[i],o=opts(q),good=k==q.a;
+document.querySelectorAll('.opt').forEach(function(b){var v=+b.dataset.k;if(v==q.a)b.className='opt ok';else if(v==k)b.className='opt no';b.disabled=true});
+var msg='';
+if(good){var p=10+Math.round(left);score+=p;streak++;okc++;msg='<p class="c"><b>+'+p+'</b></p>'}
+else{streak=0;wrong.push(q);msg='<p class="c">'+(k<0?'⏰ '+t.tm+' ':'')+t.ok+': <b>'+esc(o[q.a])+'</b></p>'}
+$('fb').innerHTML=msg+'<button class="btn" id="nx">'+(i+1<qs.length?t.next:t.fin)+'</button>';
+$('nx').onclick=function(){i++;if(i<qs.length)ques();else end()}}
+function end(re){
+scr='end';var t=T[L],r=okc/qs.length,ttl=r>=.9?t.ex:r>=.6?t.mid:t.nb;if(!re)isRec=score>(best[cat]||0);
+if(isRec&&!re){best[cat]=score;try{localStorage.setItem('b',JSON.stringify(best))}catch(e){}}
+var h='<div class="q c"><div class="mut">'+t.res+' · '+C[cat][L]+'</div><div class="big">'+score+'</div><b>'+okc+' / '+qs.length+' '+t.cor+'</b><p>'+ttl+(isRec?'<br>'+t.rec:'')+'</p></div>';
+if(wrong.length){h+='<h3>'+t.err+'</h3>';wrong.forEach(function(q){h+='<div class="rv">'+esc(q.t[L])+'<br><b>✔ '+esc(opts(q)[q.a])+'</b></div>'})}
+else h+='<p class="c"><b>'+t.perf+'</b></p>';
+$('app').innerHTML=h+'<button class="btn" id="ag">'+t.again+'</button><button class="btn g" id="hm">'+t.home+'</button>';
+var bg=document.querySelector('.big');if(bg&&!re&&score>0){var n=0,st=Math.max(1,Math.ceil(score/30));bg.textContent=0;var iv=setInterval(function(){n=Math.min(score,n+st);bg.textContent=n;if(n>=score)clearInterval(iv)},25)}
+$('ag').onclick=function(){start(cat)};$('hm').onclick=home}
+function render(){$('bk').className=L=='kk'?'on':'';$('br').className=L=='ru'?'on':'';document.documentElement.lang=L;
+if(scr=='home')home();else if(scr=='q'){var was=ans;if(was){/* keep answered state simple: restart language view */}paint();if(ans){ans=false;var q=qs[i];document.querySelectorAll('.opt').forEach(function(b){b.disabled=true;if(+b.dataset.k==q.a)b.className='opt ok'});ans=true;$('fb').innerHTML='<button class="btn" id="nx">'+(i+1<qs.length?T[L].next:T[L].fin)+'</button>';$('nx').onclick=function(){i++;if(i<qs.length)ques();else end()}}}
+else end(true)}
+function setL(l){L=l;try{localStorage.setItem('l',l)}catch(e){}render()}
+$('bk').onclick=function(){setL('kk')};$('br').onclick=function(){setL('ru')};$('lg').onclick=home;
+render();
+</script>
+</body>
+</html>
